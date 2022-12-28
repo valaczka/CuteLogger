@@ -1,38 +1,40 @@
-QT       -= gui
-
-TARGET = CuteLogger
 TEMPLATE = lib
+
+android: TARGET = CuteLogger_$${QT_ARCH}
+else: TARGET = CuteLogger
+
+#!win32: CONFIG += staticlib
+
+DESTDIR = ..
 
 DEFINES += CUTELOGGER_LIBRARY
 
-INCLUDEPATH += ./include
+INCLUDEPATH += $$PWD/include
 
-SOURCES += src/Logger.cpp \
-           src/AbstractAppender.cpp \
-           src/AbstractStringAppender.cpp \
-           src/ConsoleAppender.cpp \
-           src/FileAppender.cpp \
-           src/RollingFileAppender.cpp
+SOURCES += $$PWD/src/Logger.cpp \
+		   $$PWD/src/AbstractAppender.cpp \
+		   $$PWD/src/AbstractStringAppender.cpp \
+		   $$PWD/src/ConsoleAppender.cpp \
+		   $$PWD/src/FileAppender.cpp \
+		   $$PWD/src/RollingFileAppender.cpp \
+		   $$PWD/src/ColorConsoleAppender.cpp
 
-HEADERS += include/Logger.h \
-           include/CuteLogger_global.h \
-           include/AbstractAppender.h \
-           include/AbstractStringAppender.h \
-           include/ConsoleAppender.h \
-           include/FileAppender.h \
-           include/RollingFileAppender.h
+HEADERS += $$PWD/include/Logger.h \
+		   $$PWD/include/CuteLogger_global.h \
+		   $$PWD/include/AbstractAppender.h \
+		   $$PWD/include/AbstractStringAppender.h \
+		   $$PWD/include/ConsoleAppender.h \
+		   $$PWD/include/FileAppender.h \
+		   $$PWD/include/RollingFileAppender.h \
+		   $$PWD/include/ColorConsoleAppender.h
 
 win32 {
-    SOURCES += src/OutputDebugAppender.cpp
-    HEADERS += include/OutputDebugAppender.h
+	SOURCES += $$PWD/src/OutputDebugAppender.cpp
+	HEADERS += $$PWD/include/OutputDebugAppender.h
 }
 
 android {
-    SOURCES += src/AndroidAppender.cpp
-    HEADERS += include/AndroidAppender.h
+	SOURCES += $$PWD/src/AndroidAppender.cpp
+	HEADERS += $$PWD/include/AndroidAppender.h
 }
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
