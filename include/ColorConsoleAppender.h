@@ -34,9 +34,46 @@ class CUTELOGGERSHARED_EXPORT ColorConsoleAppender : public ConsoleAppender
 public:
 	ColorConsoleAppender();
 
+	// Formatting codes
+	static const std::string reset;
+	static const std::string bold;
+	static const std::string dark;
+	static const std::string underline;
+	static const std::string blink;
+	static const std::string reverse;
+	static const std::string concealed;
+	static const std::string clear_line;
+
+	// Foreground colors
+	static const std::string black;
+	static const std::string red;
+	static const std::string green;
+	static const std::string yellow;
+	static const std::string blue;
+	static const std::string magenta;
+	static const std::string cyan;
+	static const std::string white;
+
+	/// Background colors
+	static const std::string on_black;
+	static const std::string on_red;
+	static const std::string on_green;
+	static const std::string on_yellow;
+	static const std::string on_blue;
+	static const std::string on_magenta;
+	static const std::string on_cyan;
+	static const std::string on_white;
+
+	const QHash<Logger::LogLevel, std::string> &levelColor() const;
+	void setLevelColor(const Logger::LogLevel &level, const std::string &color);
+	std::string levelColor(const Logger::LogLevel &level) const;
+
 protected:
-  virtual void append(const QDateTime& timeStamp, Logger::LogLevel logLevel, const char* file, int line,
-					  const char* function, const QString& category, const QString& message) override;
+	virtual void append(const QDateTime& timeStamp, Logger::LogLevel logLevel, const char* file, int line,
+						const char* function, const QString& category, const QString& message) override;
+
+private:
+	QHash<Logger::LogLevel, std::string> m_levelColor;
 };
 
 #endif // COLORCONSOLEAPPENDER_H
