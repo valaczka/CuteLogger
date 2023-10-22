@@ -5,6 +5,8 @@ else: TARGET = CuteLogger
 
 #!win32: CONFIG += staticlib
 
+CONFIG += separate_debug_info
+
 DESTDIR = ..
 
 DEFINES += CUTELOGGER_LIBRARY
